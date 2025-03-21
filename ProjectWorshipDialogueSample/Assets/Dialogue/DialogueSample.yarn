@@ -1,0 +1,161 @@
+title: Start
+---
+<<declare $explainedSymbols = false>>
+<<declare $talkedSymbols = false>>
+    SO: Hey! Get up. We need to talk.
+    Player: H-huh?
+    SO: You gotta tell me what's been going on with you lately.
+    Player: What do you mean?
+    SO: There's clearly something wrong. You're distant. You're irritated. All you do is sleep and work, and if you're not sleeping, you just sit in bed with this stupid look on your face. You don't look good.
+        -> Player: I don't know what you're talking about.
+            <<jump What>>
+        -> Player: Yeah, I guess I should probably tell you...
+            <<jump StartExplain>>
+        -> Player: ...
+            <<jump Tired>>
+===
+
+title: What
+---
+    SO: Don't pull that shit with me. We both know that you're hiding something.
+    Player: I'm not--
+    SO: Yes you are! You barely talk to me anymore. What's happened to you?
+    Player: ... Nothing.
+        <<jump Tired>>
+===
+
+title: Tired
+---
+    SO: No! You don't get to keep ignoring this. I've had enough. You NEED to tell me what's going on. 
+    Player: It's nothing. I'm fine.
+    SO: It's not nothing!
+    Player: It is. I'm just tired from--
+    SO: This isn't just you being tired! Every night you bolt awake, mumble something to yourself, then go back to sleep. Something is wrong.
+        -> Player: Really, I'm just tired.
+            <<jump Deny>>
+        -> Player: Okay, okay.
+            <<jump StartExplain>>
+        -> Player: Nice of you to notice.
+            <<jump Project>>
+===
+
+title: Deny
+---
+    SO: Fine. If you're really not going to tell me, then I'm done trying to help. I just wanted to make sure you were okay. You've been scaring me.
+    Player: I'm fine. I'm sure I'll be back to normal soon. (I'm sure it will all stop.)
+    SO: What do you mean "it will all stop?"
+        -> Player: You weren't supposed to hear that last part.
+            <<jump Heard>>
+        -> Player: Fuck. I guess I can't hide it now.
+            <<jump StartExplain>>
+        -> Player: Me being tired.
+            <<jump End2>>
+===
+
+title: Project
+---
+    SO: What is THAT supposed to mean?
+    Player: I mean this has been happening for weeks and you haven't cared enough to say anything till now. 
+    SO: Seriously? You're gonna turn this around on me and try to make it seem like I'm the problem? You're the one who doesn't talk to me!
+    Player: Why do you have a problem with me all of a sudden? Why now did you decide to say something about it?
+        <<jump End2>>
+===
+
+title: Heard
+---
+    SO: Well I heard it. You've finally admitted something is happening, so just tell me.
+    Player: Okay... okay.
+        <<jump StartExplain>>
+===
+
+title: StartExplain
+---
+    Player: I've been having these weird dreams lately. They started randomly a couple weeks ago and now they're just getting... weird.
+    SO: What do you mean weird?
+    Player: I don't know how to explain it. I just can't seem to shake the thought of them. It's all I think about. 
+    SO: Please. Tell me what you're dreaming about.
+        -> Player: It's always these weird symbols.
+            <<jump Symbols>>
+        -> Player: It's not just one dream. They keep changing.
+            <<jump MultipleDreams>>
+        -> Player: I'm also seeing things.
+            <<jump ChangeTopic>>
+===
+
+title: ChangeTopic
+---
+<<set $explainedSymbols to true>>
+    <<if $talkedSymbols == false>>
+        SO: You're seeing things? What kind of things?
+        Player: I don't know. Just things. Stuff that's normally not there.
+    <<endif>>
+
+    SO: Like hallucinations? 
+    Player: I guess?
+    SO: Okay, so I'll get us an appointment with a psychologist and we can go from there.
+    Player: No! It's not like that. There's nothing wrong with my head. 
+    SO: If it's not like that, what's it like then?
+    Player: It's the symbols from my dreams. They just appear randomly, then dissapear. This isn't some normal thing. I don't know what it is, but it's not normal.
+    <<if $talkedSymbols == false>>
+        <<jump Symbols>>
+    <<else>>
+        <<jump End1>>
+    <<endif>>
+===
+
+title: Symbols
+---
+<<set $talkedSymbols to true>>
+    SO: What symbols? What are you talking about?
+    Player: In my dreams. These weird symbols appear, flash through a bunch of them, then I wake up.
+    SO: What are the symbols? What do they look like?
+    Player: That's the thing... I don't know. They flick through them so fast that I can't get a good look at them. 
+    SO: Are they always the same?
+    Player: I think so? 
+    Player: I can never remember what they look like when I wake up, but I just have this feeling whenever I see them that I've seen them before.
+    SO: Is it just the symbols in your dreams? Or is there more?
+        -> Player: It's just the symbols.
+            <<jump End1>>
+        -> Player: There's more.
+            <<jump MultipleDreams>>
+        <<if $explainedSymbols == false>>
+            -> Player: I also see the symbols when I'm awake.
+        <<endif>>
+===
+
+title: MultipleDreams
+---
+    <<if $talkedSymbols == true>>
+        SO: What else is there?
+        Player: Just more dreams. They change every once and a while.
+    <<endif>>
+    
+    SO: What do you mean they change?
+    Player: Well the first week was the symbols, then it changed to me being in some forest, and now it's gone to something much worse.
+    SO: Worse?
+    Player: In the forest dreams, I was able to move and check some things out, but now I can't even move. 
+    Player: I'm chained to some stone table thing. It's like I'm paralyzed or something. You'd think I could at least try, move my hands and feet or turn my neck, but I can't.
+    SO: Is that the whole dream? Stuck and then wake up?
+    Player: No... they just keep getting closer, then one of them pulls out a knife or something. They cut me a bunch while humming a weird song or some shit, then I wake up.
+    SO: Oh my god...
+    Player: Yeah. Every night, the same thing.
+    SO: I don't even know what to say. What do you mean "they"?
+    Player: I don't know. They all look the same, move the same, hum the same. It seems like some serious Children of the Corn type shit.
+        <<jump End1>>
+===
+
+title: End1
+---
+    SO: So what do we do?
+    Player: I don't know.
+    SO: Well we have to do something!
+    Player: It's just some weird dreams. It'll be okay.
+    SO: We need to get you help. This isn't normal.
+    Player: NO! I need them. I like the dreams. I won't stop them.
+===
+
+title: End2
+---
+    SO: Okay, I'm done. Deal with it yourself. All I do is try and help, and you give me nothing back. 
+    Player: Okay... I'm sorry.
+===
